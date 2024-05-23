@@ -52,7 +52,7 @@ function renderPlaylistHeader(playlistForRendering){
 
   function renderTrack(inputTrackForRendering){
     // здесь логика отрисовки "входного" трека
-    let track1Element = document.createElement('div');
-    track1Element.append(inputTrackForRendering.artistName + ' - ' + input.playlistForRendering.title);
-    document.body.append(track1Element);
+    let trackElement = document.createElement('div');
+    trackElement.append(inputTrackForRendering.artistName + ' - ' + inputTrackForRendering.title);
+    document.body.append(trackElement);
   } 
