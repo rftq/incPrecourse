@@ -31,22 +31,28 @@ renderPlaylist(playlist)
 
 function renderPlaylist(playlistForRendering) {
     // all render code should be here.
+    renderPlaylistHeader(playlistForRendering)
+
+    renderTrack(playlistForRendering.tracks[0]);
+    renderTrack(playlistForRendering.tracks[1]);
+}
+
+
+function renderPlaylistHeader(playlistForRendering){
+    // здесь логика отрисовки шапки "входного" плейлиста
     let playlistImageElement = document.createElement('img');
     playlistImageElement.src = playlistForRendering.coverImageUrl;
     document.body.append(playlistImageElement);
+
     let playlistTitleElement = document.createElement('h2');
     playlistTitleElement.append(playlistForRendering.title);
     document.body.append(playlistTitleElement);
+  }
 
-    let tracksListElement = document.createElement('ul');
 
-    let track1Element = document.createElement('li');
-    track1Element.append(playlistForRendering.tracks[0].artistName + ' - ' + playlist.tracks[0].title);
-    let track2Element = document.createElement('li');
-    track2Element.append(playlistForRendering.tracks[1].artistName + ' - ' + playlist.tracks[1].title);
-
-    tracksListElement.append(track1Element);
-    tracksListElement.append(track2Element);
-
-    document.body.append(tracksListElement);
-}
+  function renderTrack(inputTrackForRendering){
+    // здесь логика отрисовки "входного" трека
+    let track1Element = document.createElement('div');
+    track1Element.append(inputTrackForRendering.artistName + ' - ' + input.playlistForRendering.title);
+    document.body.append(track1Element);
+  } 
