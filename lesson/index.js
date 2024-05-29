@@ -108,3 +108,10 @@ techSelectOptions2Element.append(info.technologies[2].title);
 techSelectElement.append(techSelectOptions0Element, techSelectOptions1Element, techSelectOptions2Element);
 
 document.body.append(techSelectElement);
+
+
+
+
+
+
+// 05.01.2024 1:12
