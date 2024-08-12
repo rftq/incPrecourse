@@ -13,19 +13,19 @@ let playlist = {
     tracks: [
         {
             trackId: '1',
-            coverImageUrl: 'img/eminem.jpeg',
+            coverImageUrl: './img/eminem.jpeg',
             artistName: 'Eminem',
             title: 'Rap God',
-            fileUrl: 'audio/eminem_rap_god.mp3',
+            fileUrl: './audio/eminem_rap_god.mp3',
 
             trackDurationInSec: 1,
             isHot: false
         },
         {
-            coverImageUrl: 'img/50cent.jpeg',
+            coverImageUrl: './img/50cent.jpeg',
             artistName: '50cent',
             title: 'In da Club',
-            fileUrl: 'audio/50cent_in_da_club.mp3',
+            fileUrl: './audio/50cent_in_da_club.mp3',
             trackDurationInSec: 1,
             isHot: true
         }
@@ -102,7 +102,22 @@ function renderTrack(anyTrack) {
 renderPlaylist(playlist);
 
 
+// с помощью цикла
+const tracklistElement = document.createElement('ul')
+for (let i = 0; i < playlist.tracks.length; i++) {
+    const trackElement = document.createElement('li')
 
+    const trackCoverElement = document.createElement('img')
+
+    trackCoverElement.src = playlist.tracks[i].coverImageUrl
+    trackCoverElement.style.width = '50px';
+    trackCoverElement.style.height = '50px';
+    trackElement.append(trackCoverElement)
+    trackElement.append(playlist.tracks[i].artistName + ": " + playlist.tracks[i].title)
+    tracklistElement.append(trackElement)
+}
+
+document.body.append(tracklistElement);
 
 
 
