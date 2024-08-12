@@ -1,72 +1,152 @@
 //data
 let playlist = {
-    title: 'Hip-Hop Hits',
-    coverImage: './hip-hop-hits.jpg',
-    info: {
-        totalTracksCount: 4,
-        totalTrackDurationInSeconds: 733,
+    playlistId: '1',
+    playlistInfo: {
+        title: 'Hip-Hop Hits',
+        coverImage: 'img/cover.jpeg',
+        info: {
+            totalTracksCount: 4,
+            totalTrackDurationInSeconds: 733,
+        },
     },
+
     tracks: [
         {
-            coverImageUrl: 'track1.jpeg',
+            trackId: '1',
+            coverImageUrl: 'img/eminem.jpeg',
             artistName: 'Eminem',
             title: 'Rap God',
-            fileUrl: 'Eminem_-_Rap_God.mp3',
-            isHot: false,
+            fileUrl: 'audio/eminem_rap_god.mp3',
+
+            trackDurationInSec: 1,
+            isHot: false
         },
         {
-            coverImageUrl: 'track2.jpeg',
+            coverImageUrl: 'img/50cent.jpeg',
             artistName: '50cent',
             title: 'In da Club',
-            fileUrl: '50_Cent_-_In_Da_Club.mp3',
-            isHot: true,
+            fileUrl: 'audio/50cent_in_da_club.mp3',
+            trackDurationInSec: 1,
+            isHot: true
         }
     ]
 }
 
 
 
-// render
-renderPlaylist(playlist)
+// const playlistTitleEl = document.createElement('h1');
+// playlistTitleEl.append(playlist.title);
+// document.body.append(playlistTitleEl);
 
-function renderPlaylist(playlistForRendering) {
-    // all render code should be here.
-    renderPlaylistHeader(playlistForRendering)
+// const playlistCoverEl = document.createElement('img');
+// playlistCoverEl.src = playlist.coverImage;
+// playlistCoverEl.style.width = '100px';
+// playlistCoverEl.style.height = '100px';
+// document.body.append(playlistCoverEl);
 
-    renderTrack(playlistForRendering.tracks[0]);
-    renderTrack(playlistForRendering.tracks[1]);
+
+
+// const tracksListEl = document.createElement('ul');
+
+// const track_1_El = document.createElement('li');
+// track_1_El.append(playlist.tracks[0].artistName + ": " + playlist.tracks[0].title);
+
+// const track_2_El = document.createElement('li');
+// track_2_El.append(playlist.tracks[1].artistName + ": " + playlist.tracks[1].title);
+
+// tracksListEl.append(track_1_El, track_2_El);
+// document.body.append(tracksListEl)
+
+
+
+
+
+
+
+
+function renderPlaylist(anyPlaylist) {
+    renderPlaylistHeader(anyPlaylist.playlistInfo)
+    renderTrack(anyPlaylist.tracks[0]);
+    renderTrack(anyPlaylist.tracks[1]);
 }
 
 
-function renderPlaylistHeader(playlistForRendering) {
-    // здесь логика отрисовки шапки "входного" плейлиста
-    let playlistImageElement = document.createElement('img');
-    playlistImageElement.src = playlistForRendering.coverImageUrl;
-    document.body.append(playlistImageElement);
+function renderPlaylistHeader(anyPlaylistInfo) {
+    const playlistTitleEl = document.createElement('h1');
+    playlistTitleEl.append(anyPlaylistInfo.title);
+    document.body.append(playlistTitleEl);
 
-    let playlistTitleElement = document.createElement('h2');
-    playlistTitleElement.append(playlistForRendering.title);
-    document.body.append(playlistTitleElement);
+    const playlistCoverEl = document.createElement('img');
+    playlistCoverEl.src = anyPlaylistInfo.coverImage;
+    playlistCoverEl.style.width = '150px';
+    playlistCoverEl.style.height = '150px';
+    document.body.append(playlistCoverEl);
 }
 
 
-function renderTrack(inputTrackForRendering) {
-    // здесь логика отрисовки "входного" трека
-    let trackElement = document.createElement('div');
-    trackElement.append(inputTrackForRendering.artistName + ' - ' + inputTrackForRendering.title);
+function renderTrack(anyTrack) {
+    const trackEl = document.createElement('div');
+    const cover = document.createElement('img');
+    cover.src = anyTrack.coverImageUrl;
+    cover.style.width = '50px';
+    trackEl.append(cover);
+    trackEl.append(anyTrack.artistName + ": " + anyTrack.title);
+    const audio = document.createElement('audio');
+    audio.src = anyTrack.fileUrl;
+    audio.controls = true;
+    trackEl.append(audio);
 
-    let playerElement = document.createElement('audio');
-    playerElement.src = inputTrackForRendering.fileUrl;
-    playerElement.controls = true;
-    trackElement.append(playerElement);
-
-    let coverElement = document.createElement('img');
-    coverElement.src = inputTrackForRendering.coverImageUrl;
-    trackElement.append(coverElement);
-
-    document.body.append(trackElement);
+    document.body.append(trackEl);
 }
 
+renderPlaylist(playlist);
 
 
-// 16 minuta video ot 6 января 2024
+
+
+
+
+
+
+// // render
+// renderPlaylist(playlist)
+
+// function renderPlaylist(playlistForRendering) {
+//     // all render code should be here.
+//     renderPlaylistHeader(playlistForRendering)
+
+//     renderTrack(playlistForRendering.tracks[0]);
+//     renderTrack(playlistForRendering.tracks[1]);
+// }
+
+
+// function renderPlaylistHeader(playlistForRendering) {
+//     // здесь логика отрисовки шапки "входного" плейлиста
+//     let playlistImageElement = document.createElement('img');
+//     playlistImageElement.src = playlistForRendering.coverImageUrl;
+//     document.body.append(playlistImageElement);
+
+//     let playlistTitleElement = document.createElement('h2');
+//     playlistTitleElement.append(playlistForRendering.title);
+//     document.body.append(playlistTitleElement);
+// }
+
+
+// function renderTrack(inputTrackForRendering) {
+//     // здесь логика отрисовки "входного" трека
+//     let trackElement = document.createElement('div');
+//     trackElement.append(inputTrackForRendering.artistName + ' - ' + inputTrackForRendering.title);
+
+//     let playerElement = document.createElement('audio');
+//     playerElement.src = inputTrackForRendering.fileUrl;
+//     playerElement.controls = true;
+//     trackElement.append(playerElement);
+
+//     let coverElement = document.createElement('img');
+//     coverElement.src = inputTrackForRendering.coverImageUrl;
+//     trackElement.append(coverElement);
+
+//     document.body.append(trackElement);
+// }
+
+

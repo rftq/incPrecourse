@@ -22,6 +22,9 @@ document.body.append(titleElement);
 // Создание выпадающего списка (select) 
 const techSelectElement = document.createElement('select');
 
+const header = document.getElementbyId("1")
+console.dir(header);
+
 // Создание первого варианта (option) для выпадающего списка 
 const techSelectOption0Element = document.createElement('option');
 techSelectOption0Element.value = 1;
@@ -112,6 +115,57 @@ document.body.append(techSelectElement);
 
 
 
+// data
+const info3 = {
+    title: 'it-incubator',
+    graduatesCount: 2000,
+    areYouChampion: true,
+    technologies: ['Front', 'Back', 'DevOps']
+}
+
+const techSelectElement3 = document.createElement('select');
+
+const techSelectElement3Option1 = document.createElement('option');
+techSelectElement3Option1.innerText = info3.technologies[0]
+techSelectElement3.append(techSelectElement3Option1);
+
+const techSelectElement3Option2 = document.createElement('option');
+techSelectElement3Option2.innerText = info3.technologies[1]
+techSelectElement3.append(techSelectElement3Option2);
+
+const techSelectElement3Option3 = document.createElement('option');
+techSelectElement3Option3.innerText = info3.technologies[2]
+techSelectElement3.append(techSelectElement3Option3);
+
+document.body.append(techSelectElement3);
 
 
-// 05.01.2024 1:12
+
+// data
+const info4 = {
+    title: 'it-incubator',
+    graduatesCount: 2000,
+    areYouChampion: true,
+    technologies: [
+        {id: 1, title: 'Front' },
+        {id: 2, title: 'Back' },
+        {id: 3, title: 'DevOps' }
+    ]
+}
+
+
+const techSelectElement4 = document.createElement('select');
+
+const techSelectElement4Option1 = document.createElement('option');
+techSelectElement4Option1.innerText = info4.technologies[0].title;
+techSelectElement4.append(techSelectElement4Option1);
+
+const techSelectElement4Option2 = document.createElement('option');
+techSelectElement4Option2.innerText = info4.technologies[1].title;
+techSelectElement4.append(techSelectElement4Option2);
+
+const techSelectElement4Option3 = document.createElement('option');
+techSelectElement4Option3.innerText = info4.technologies[2].title;
+techSelectElement4.append(techSelectElement4Option3);
+
+document.body.append(techSelectElement4);
