@@ -66,8 +66,7 @@ let playlist = {
 
 function renderPlaylist(anyPlaylist) {
     renderPlaylistHeader(anyPlaylist.playlistInfo)
-    renderTrack(anyPlaylist.tracks[0]);
-    renderTrack(anyPlaylist.tracks[1]);
+    renderTracksList(anyPlaylist.tracks);
 }
 
 
@@ -83,44 +82,77 @@ function renderPlaylistHeader(anyPlaylistInfo) {
     document.body.append(playlistCoverEl);
 }
 
-
-function renderTrack(anyTrack) {
+// не работает исправь смотри выше функцию renderPlaylist
+function renderTracksList(anyTracks) {
     const trackEl = document.createElement('div');
     const cover = document.createElement('img');
-    cover.src = anyTrack.coverImageUrl;
+    cover.src = anyTracks.coverImageUrl;
     cover.style.width = '50px';
     trackEl.append(cover);
-    trackEl.append(anyTrack.artistName + ": " + anyTrack.title);
+    trackEl.append(anyTracks.artistName + ": " + anyTracks.title);
     const audio = document.createElement('audio');
-    audio.src = anyTrack.fileUrl;
+    audio.src = anyTracks.fileUrl;
     audio.controls = true;
     trackEl.append(audio);
 
     document.body.append(trackEl);
 }
 
-renderPlaylist(playlist);
 
 
 // с помощью цикла
-const tracklistElement = document.createElement('ul')
-for (let i = 0; i < playlist.tracks.length; i++) {
-    const trackElement = document.createElement('li')
+// function renderTracksList(anyTracks) {
+// const tracklistElement = document.createElement('ul')
+// for (let i = 0; i < anyTracks.length; i++) {
+//     const trackElement = document.createElement('li')
 
-    const trackCoverElement = document.createElement('img')
+//     const trackCoverElement = document.createElement('img')
 
-    trackCoverElement.src = playlist.tracks[i].coverImageUrl
-    trackCoverElement.style.width = '50px';
-    trackCoverElement.style.height = '50px';
-    trackElement.append(trackCoverElement)
-    trackElement.append(playlist.tracks[i].artistName + ": " + playlist.tracks[i].title)
-    tracklistElement.append(trackElement)
+//     trackCoverElement.src = anyTracks[i].coverImageUrl
+//     trackCoverElement.style.width = '50px';
+//     trackCoverElement.style.height = '50px';
+//     trackElement.append(trackCoverElement)
+//     trackElement.append(anyTracks[i].artistName + ": " + anyTracks[i].title)
+//     tracklistElement.append(trackElement)
+// }
+
+// document.body.append(tracklistElement);
+// }
+
+
+
+
+
+// с помощью цикла улучшено
+function renderTracksList(anyTracks) {
+    const tracklistElement = document.createElement('ul')
+    for (let i = 0; i < anyTracks.length; i++) {
+        const trackElement = createTrack(anyTracks[i])
+        tracklistElement.append(trackElement)
+    }
+    document.body.append(tracklistElement);
 }
 
-document.body.append(tracklistElement);
+function createTrack(anyTrack) {
+    const trackElement = document.createElement('li')
+    const trackCoverElement = document.createElement('img')
 
+    trackCoverElement.src = anyTrack.coverImageUrl
+    trackCoverElement.style.width = '50px';
+    trackCoverElement.style.height = '50px';
 
+    const audio = document.createElement("audio")
+    audio.src = anyTrack.fileUrl
+    audio.controls = true
 
+    trackElement.append(trackCoverElement)
+    trackElement.append(anyTrack.artistName + ": " + anyTrack.title)
+    trackElement.append(audio)
+
+    return trackElement
+}
+
+renderPlaylist(playlist);
 
 
 // // render
