@@ -217,6 +217,7 @@ function Tracklist(tracks) {
 function AddTrackPanel(params) {
     // const container = document.createElement('div')
     // container.classList.add('add-track-panel')
+    
     // вызов функции с условием или без
     const container = createElement('div', 'add-track-panel')
 
@@ -244,14 +245,13 @@ function AddTrackPanel(params) {
 //     return container
 // }
 
-// сокращение повторяющегося кода с помощью функции с условиями 
+// сокращение повторяющегося кода с помощью функции с условием
 function createElement(typeOfElement, param) {
     const container = document.createElement(typeOfElement)
     if (typeof param === 'string') {
         container.classList.add(param)
     } else if (typeof param === 'object') {
         for (const key in param) {
-
         }
     }
     return container
@@ -263,9 +263,61 @@ createElement('div', {class: 'button-add-track', innerText: 'Btn', src: 'etc'})
 //========================================================
 
 function List(tracks) {
-    
+    const container = document.createElement('ul')
+    container.classList.add('list')
+
+    for (let i = 0; i < tracks.length; i++) {
+        // container.append(tracks[i].trackTitle)
+        container.append(Track(tracks[i]))
+    }
+
+    return container
 }
 
+//========================================================
+
+function Track(track) {
+    const container = document.createElement('li')
+    container.classList.add('track-element')
+
+    const trackCoverImg = document.createElement('img')
+    trackCoverImg.classList.add('track-cover-image')
+    trackCoverImg.src = track.trackCoverImageUrl
+
+    container.append(
+        trackCoverImg,
+        TrackDetails(track)
+    )
+
+    return container
+}
+
+//========================================================
+
+function TrackDetails(track) {
+    const container = document.createElement('div')
+    container.classList.add('track-details')
+
+    const audio = document.createElement('audio')
+    audio.src = track.trackFileUrl
+    audio.controls = true
+
+    container.append(
+        trackTopLine(track),
+        audio
+    )
+
+    return container
+}
+
+//========================================================
+
+function trackTopLine(track) {
+    const container = document.createElement('div')
+    container.classList.add('track-top-line')
+
+    return container
+}
 
 //========================================================
 
