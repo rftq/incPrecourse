@@ -55,13 +55,13 @@ const data = {
     ]
 }
 
-function App() {
+function App(someData) {
     const container = document.createElement('div')
     container.classList.add('App')
 
     container.append(
         Header(),
-        Main(),
+        Main(someData),
     )
 
     return container
@@ -94,12 +94,12 @@ function Header(){
 
 //========================================================
 
-function Main(){
+function Main(someData){
     const container = document.createElement('main')
 
     container.append(
         AddPlaylistPanel(),
-        Playlists()
+        Playlists(someData)
     )
 
     return container
@@ -130,12 +130,12 @@ function AddPlaylistPanel(){
 
 //========================================================
 
-function Playlists(){
+function Playlists(someData){
     const container = document.createElement('div')
     container.classList.add('playlists')
 
-    for (let i = 0; i < data.playlists.length; i++) {
-        container.append(Playlist(data.playlists[i]));
+    for (let i = 0; i < someData.playlists.length; i++) {
+        container.append(Playlist(someData.playlists[i]));
     }
 
     return container
@@ -143,12 +143,17 @@ function Playlists(){
 
 //========================================================
 
-function Playlist(playlist) {
+function Playlist(somePlaylist) {
+    // const playlistInfo = somePlaylist.playlistInfo
+    // const tracks = somePlaylist.tracks
+
+    const { playlistInfo, tracks } = somePlaylist
+
     const container = document.createElement('article')
     container.classList.add('playlist')
     container.append(
-        PlaylistInfo(playlist.playlistInfo),
-        Tracklist(playlist.tracks)
+        PlaylistInfo(playlistInfo),
+        Tracklist(tracks)
     )
 
     return container
@@ -156,58 +161,60 @@ function Playlist(playlist) {
 
 //========================================================
 
-function PlaylistInfo(playlistInfo) {
+function PlaylistInfo(somePlaylistInfo) {
+    const {coverImgUrl, title, tracksCount} = somePlaylistInfo
+
     const container = document.createElement('div')
     container.classList.add('playlist-info')
 
     const img  = document.createElement('img')
     img.classList.add('playlist-cover-image')
-    img.src = playlistInfo.coverImgUrl
+    img.src = coverImgUrl
 
     const wrapper = document.createElement('div')
 
-    const title = document.createElement('h2')
-    title.classList.add('title')
-    title.innerText = playlistInfo.title
+    const titleElement = document.createElement('h2')
+    titleElement.classList.add('title')
+    titleElement.innerText = title
 
-    const tracksCount = document.createElement('div')
-    tracksCount.classList.add('tracks-count')
-    tracksCount.innerText = playlistInfo.tracksCount + ' tracks'
+    const tracksCountElement = document.createElement('div')
+    tracksCountElement.classList.add('tracks-count')
+    tracksCountElement.innerText = tracksCount + ' tracks'
 
-    wrapper.append(title, tracksCount)
+    wrapper.append(titleElement, tracksCountElement)
 
-    const buttonsContainer = document.createElement('div')
-    buttonsContainer.classList.add('buttons-container')
+    // const buttonsContainer = document.createElement('div')
+    // buttonsContainer.classList.add('buttons-container')
 
-    const editBtn = document.createElement('button')
-    const editBtnImg = document.createElement('img')
-    editBtnImg.src = 'img/icons/edit.svg'
-    editBtn.append(editBtnImg)
+    // const editBtn = document.createElement('button')
+    // const editBtnImg = document.createElement('img')
+    // editBtnImg.src = 'img/icons/edit.svg'
+    // editBtn.append(editBtnImg)
 
-    const delBtn = document.createElement('button')
-    const delBtnImg = document.createElement('img')
-    delBtnImg.src = 'img/icons/basket.svg'
-    delBtn.append(delBtnImg)
+    // const delBtn = document.createElement('button')
+    // const delBtnImg = document.createElement('img')
+    // delBtnImg.src = 'img/icons/basket.svg'
+    // delBtn.append(delBtnImg)
 
-    buttonsContainer.append(
-        editBtn,
-        delBtn
-    )
+    // buttonsContainer.append(
+    //     editBtn,
+    //     delBtn
+    // )
 
-    container.append(img, wrapper, buttonsContainer)
+    container.append(img, wrapper, ButtonsEditDelete())
 
     return container
 }
 
 //========================================================
 
-function Tracklist(tracks) {
+function Tracklist(someTracks) {
     const container = document.createElement('div')
     container.classList.add('tracklist')
 
     container.append(
         AddTrackPanel(),
-        List(tracks)
+        List(someTracks)
     )
 
     return container
@@ -262,13 +269,13 @@ createElement('div', {class: 'button-add-track', innerText: 'Btn', src: 'etc'})
 
 //========================================================
 
-function List(tracks) {
+function List(someTracks) {
     const container = document.createElement('ul')
     container.classList.add('list')
 
-    for (let i = 0; i < tracks.length; i++) {
+    for (let i = 0; i < someTracks.length; i++) {
         // container.append(tracks[i].trackTitle)
-        container.append(Track(tracks[i]))
+        container.append(Track(someTracks[i]))
     }
 
     return container
@@ -276,17 +283,19 @@ function List(tracks) {
 
 //========================================================
 
-function Track(track) {
+function Track(someTrack) {
+    const { trackCoverImageUrl, ...restTrackData } = someTrack
+
     const container = document.createElement('li')
     container.classList.add('track-element')
 
     const trackCoverImg = document.createElement('img')
     trackCoverImg.classList.add('track-cover-image')
-    trackCoverImg.src = track.trackCoverImageUrl
+    trackCoverImg.src = trackCoverImageUrl
 
     container.append(
         trackCoverImg,
-        TrackDetails(track)
+        TrackDetails(restTrackData)
     )
 
     return container
@@ -294,16 +303,18 @@ function Track(track) {
 
 //========================================================
 
-function TrackDetails(track) {
+function TrackDetails(someRestTrackData) {
+    const { trackFileUrl, ...restTrackData } = someRestTrackData
+
     const container = document.createElement('div')
     container.classList.add('track-details')
 
     const audio = document.createElement('audio')
-    audio.src = track.trackFileUrl
+    audio.src = trackFileUrl
     audio.controls = true
 
     container.append(
-        trackTopLine(track),
+        trackTopLine(restTrackData),
         audio
     )
 
@@ -312,16 +323,60 @@ function TrackDetails(track) {
 
 //========================================================
 
-function trackTopLine(track) {
+function trackTopLine(someRestTrackData) {
+    const { isHot, artistName, trackTitle } = someRestTrackData
+
     const container = document.createElement('div')
     container.classList.add('track-top-line')
+
+    if (isHot) {
+        const trackHotImg = document.createElement('img')
+        trackHotImg.classList.add('track-status')
+        trackHotImg.src = 'img/icons/hot.svg'
+        container.append(trackHotImg)
+    }
+    const trackInfo = document.createElement('div')
+    trackInfo.classList.add('track-info')
+
+    const trackName = document.createElement('div')
+    trackName.classList.add('track-name')
+    trackName.innerText = artistName + '-' + trackTitle
+    trackInfo.append(
+        trackName,
+        ButtonsEditDelete()
+    )
+
+    container.append(trackInfo)
 
     return container
 }
 
 //========================================================
 
-const root = document.getElementById('root')
-root.append(
-    App()   // application
-)
+function ButtonsEditDelete() {
+    const buttonsContainer = document.createElement('div')
+    buttonsContainer.classList.add('buttons-container')
+
+    const editBtn = document.createElement('button')
+    const editBtnImg = document.createElement('img')
+    editBtnImg.src = 'img/icons/edit.svg'
+    editBtn.append(editBtnImg)
+
+    const delBtn = document.createElement('button')
+    const delBtnImg = document.createElement('img')
+    delBtnImg.src = 'img/icons/basket.svg'
+    delBtn.append(delBtnImg)
+
+    buttonsContainer.append(editBtn, delBtn)
+    return buttonsContainer
+}
+
+//========================================================
+function render(someData) {
+    const root = document.getElementById('root')
+    root.append(
+        App(someData)   // application
+    )
+}
+
+render(data)
