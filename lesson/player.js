@@ -1,36 +1,378 @@
 //data
-let playlist = {
-    playlistId: '1',
-    playlistInfo: {
-        title: 'Hip-Hop Hits',
-        coverImage: 'img/cover.jpeg',
-        info: {
-            totalTracksCount: 4,
-            totalTrackDurationInSeconds: 733,
-        },
-    },
-
-    tracks: [
+const data = {
+    playlists: [
         {
-            trackId: '1',
-            coverImageUrl: './img/eminem.jpeg',
-            artistName: 'Eminem',
-            title: 'Rap God',
-            fileUrl: './audio/eminem_rap_god.mp3',
-
-            trackDurationInSec: 1,
-            isHot: false
+            playlistInfo: {
+                id: "1-0",
+                title: 'Hip-Hop Hits',
+                coverImgUrl: 'img/cardImage/image1.jpeg',
+                tracksCount: 4
+            },
+            tracks: [
+                {
+                    trackId: '1',
+                    trackCoverImageUrl: 'img/cardImage/trackList/track1.jpeg',
+                    artistName: 'Eminem',
+                    trackTitle: 'Rap God',
+                    trackFileUrl: './audio/Eminem - Rap God.mp3',
+                    isHot: true,
+                },
+                {
+                    trackId: '2',
+                    trackCoverImageUrl: 'img/cardImage/trackList/track2.jpeg',
+                    artistName: '50cent',
+                    trackTitle: 'In da Club',
+                    trackFileUrl: './audio/50cent - In da club.mp3',
+                    isHot: false
+                }
+            ]
         },
         {
-            coverImageUrl: './img/50cent.jpeg',
-            artistName: '50cent',
-            title: 'In da Club',
-            fileUrl: './audio/50cent_in_da_club.mp3',
-            trackDurationInSec: 1,
-            isHot: true
+            playlistInfo: {
+                id: "1-1",
+                title: 'Rap Hits 1990s',
+                coverImgUrl: 'img/cardImage/image2.jpeg',
+                tracksCount: 4
+            },
+            tracks: [
+                {
+                    trackId: '5',
+                    trackCoverImageUrl: 'img/cardImage/trackList/track5.jpeg',
+                    artistName: 'Public Enemy',
+                    trackTitle: 'Fight The Power',
+                    trackFileUrl: './audio/Public Enemy - Fight The Power.mp3',
+                    isHot: true,
+                },
+                {
+                    trackId: '6',
+                    trackCoverImageUrl: 'img/cardImage/trackList/track6.jpeg',
+                    artistName: 'Vanila Ice',
+                    trackTitle: 'Ice Ice Baby',
+                    trackFileUrl: './audio/Vanila Ice - Ice Baby.mp3',
+                    isHot: true
+                }
+            ]
         }
     ]
 }
+
+
+
+
+function App() {
+    const container = document.createElement("div")
+    container.classList.add("App")
+    container.append(
+        Header(),
+        Main()
+    )
+
+    return container
+}
+
+function Header() {
+    const header = document.createElement("header")
+
+    const headerContainer = document.createElement("div")
+    headerContainer.classList.add("header-container")
+
+    const img = document.createElement("img")
+    img.src = "img/logo/logo.svg"
+
+    const logo = document.createElement("div")
+    logo.innerText = "InPlayer"
+    logo.classList.add("logo-name")
+
+    headerContainer.append(
+        img,
+        logo
+    )
+    header.append(headerContainer)
+
+    return header
+}
+
+//================================================================
+
+function Main() {
+    const container = document.createElement("main")
+
+    container.append(
+        AddPlaylistPanel(),
+        Playlists()
+    )
+    return container
+}
+
+//=================================================================
+
+function AddPlaylistPanel(){
+    const container = document.createElement("div")
+    container.classList.add('add-playlist-panel')
+
+    const appHeader = document.createElement("h1")
+    appHeader.innerText = "My playlists"
+    appHeader.classList.add("title")
+
+    const addButton = document.createElement("button")
+    addButton.innerText = "Add playlist"
+    addButton.classList.add("button")
+
+    container.append(
+        appHeader,
+        addButton
+    )
+
+    return container
+}
+
+//=================================================================
+
+function Playlists() {
+    const container = document.createElement("div")
+    container.classList.add('playlists')
+
+    for (let i = 0; i < data.playlists.length; i++) {
+        container.append(Playlist(data.playlists[i]));
+    }
+
+    return container
+}
+
+//=================================================================
+
+function Playlist(playlist) {
+    const container = document.createElement("article")
+    container.classList.add('playlist')
+    container.append(
+        PlaylistInfo(playlist.playlistInfo),
+        Tracklist(playlist.tracks)
+    )
+
+    return container
+}
+
+//=================================================================
+
+function PlaylistInfo(playlistInfo){
+    const container = document.createElement('div')
+    container.classList.add('playlist-info')
+
+    const img  = document.createElement('img')
+    img.classList.add('playlist-cover-image')
+    img.src = playlistInfo.coverImgUrl
+
+    const wrapper = document.createElement('div')
+
+    const titleElement = document.createElement('h2')
+    titleElement.classList.add('title')
+    titleElement.innerText = playlistInfo.title
+
+    const tracksCountElement = document.createElement('div')
+    tracksCountElement.classList.add('tracks-count')
+    tracksCountElement.innerText = playlistInfo.tracksCount + ' tracks'
+
+    wrapper.append(titleElement, tracksCountElement)
+
+    // ButtonsEditDelete
+    // const buttonsContainer = document.createElement('div')
+    // buttonsContainer.classList.add('buttons-container')
+    
+    // const editBtn = document.createElement('button')
+    // const editBtnImg = document.createElement('img')
+    // editBtnImg.src = 'img/icons/edit.svg'
+    // editBtn.append(editBtnImg)
+
+    // const delBtn = document.createElement('button')
+    // const delBtnImg = document.createElement('img')
+    // delBtnImg.src = 'img/icons/basket.svg'
+    // delBtn.append(delBtnImg)
+
+    // buttonsContainer.append(
+    //     editBtn,
+    //     delBtn
+    // )
+
+    container.append(img, wrapper, ButtonsEditDelete())
+    // Функцию ButtonsEditDelete вызвали снизу, так как повторяющийся код
+
+    return container
+}
+
+//=================================================================
+
+function Tracklist(tracks){
+    const container = document.createElement('div')
+    container.classList.add('tracklist') 
+
+    container.append(
+        AddTrackPanel(),
+        List(tracks)
+    )
+
+    return container
+}
+
+//=================================================================
+
+function AddTrackPanel(params) {
+    const container = document.createElement("div")
+    container.classList.add("add-track-panel") 
+
+    // вызов функции с условием или без, вместо повторяющегося кода
+    // const container = createElement('div', 'add-track-panel')
+
+    const title = document.createElement("h3")
+    title.innerText = "Tracks"
+    title.classList.add("tracklist-title")
+
+    const addTrackButton = document.createElement("button")
+    addTrackButton.classList.add("button-add-track")
+
+    const addTrackButtonImg = document.createElement('img')
+    addTrackButtonImg.src = 'img/icons/add.svg'
+
+    addTrackButton.append(addTrackButtonImg, "Add Track")
+
+    container.append(
+        title,
+        addTrackButton
+    )
+
+    return container
+}
+
+//=================================================================
+
+// сокращение повторяющегося кода с помощью функции 
+// function createElement(typeOfElement, className) {
+//     const container = document.createElement(typeOfElement)
+//     container.classList.add(className)
+//     return container
+// }
+
+// сокращение повторяющегося кода с помощью функции с условием
+// function createElement(typeOfElement, param) {
+//     const container = document.createElement(typeOfElement)
+//     if (typeof param === 'string') {
+//         container.classList.add(param)
+//     } else if (typeof param === 'object') {
+//         for (const key in param) {
+//         }
+//     }
+//     return container
+// }
+
+// createElement('div', {class: 'button-add-track', innerText: 'Btn', src: 'etc'})
+
+//=================================================================
+
+function List(tracks) {
+    const container = document.createElement("ul")
+    container.classList.add("list")
+
+    for (let i = 0; i < tracks.length; i++) {
+        container.append(Track(tracks[i]))
+    }
+    
+    return container
+}
+
+//=================================================================
+
+function Track(track) {
+    const container = document.createElement("li")
+    container.classList.add("track-element")
+
+    const trackCoverImg = document.createElement("img")
+    trackCoverImg.classList.add("track-cover-image")
+
+    trackCoverImg.src = track.trackCoverImageUrl
+
+    container.append(
+        trackCoverImg,
+        TrackDetails(track)
+    )
+
+    return container
+}
+
+//=================================================================
+
+function TrackDetails(track) {
+    const container = document.createElement("div")
+    container.classList.add("track-details")
+
+    const audio = document.createElement("audio")
+    audio.src = track.trackFileUrl
+    audio.controls = true
+
+    container.append(
+        TrackTopLine(track),
+        audio
+    )
+
+    return container
+}
+
+//=================================================================
+
+function TrackTopLine(track) {
+    const container = document.createElement("div")
+    container.classList.add("track-top-line")
+
+    if (track.isHot) {
+        const trackHotImg = document.createElement('img')
+        trackHotImg.classList.add('track-status')
+        trackHotImg.src = 'img/icons/hot.svg'
+        container.append(trackHotImg)
+    }
+    const trackInfo = document.createElement('div')
+    trackInfo.classList.add('track-info')
+
+    const trackName = document.createElement('div')
+    trackName.classList.add('track-name')
+    trackName.innerText = track.artistName + '-' + track.trackTitle
+    trackInfo.append(
+        trackName,
+        ButtonsEditDelete()
+    )
+
+    container.append(trackInfo)
+
+    return container
+}
+
+//========================================================
+
+function ButtonsEditDelete() {
+    const buttonsContainer = document.createElement('div')
+    buttonsContainer.classList.add('buttons-container')
+
+    const editBtn = document.createElement('button')
+    const editBtnImg = document.createElement('img')
+    editBtnImg.src = 'img/icons/edit.svg'
+    editBtn.append(editBtnImg)
+
+    const delBtn = document.createElement('button')
+    const delBtnImg = document.createElement('img')
+    delBtnImg.src = 'img/icons/basket.svg'
+    delBtn.append(delBtnImg)
+
+    buttonsContainer.append(
+        editBtn,
+        delBtn
+    )
+
+    return buttonsContainer
+}
+
+//=================================================================
+
+const root = document.getElementById("root")
+root.append(
+    App() // => container
+)
 
 
 
@@ -64,39 +406,39 @@ let playlist = {
 
 
 
-function renderPlaylist(anyPlaylist) {
-    renderPlaylistHeader(anyPlaylist.playlistInfo)
-    renderTracksList(anyPlaylist.tracks);
-}
+// function renderPlaylist(anyPlaylist) {
+//     renderPlaylistHeader(anyPlaylist.playlistInfo)
+//     renderTracksList(anyPlaylist.tracks);
+// }
 
 
-function renderPlaylistHeader(anyPlaylistInfo) {
-    const playlistTitleEl = document.createElement('h1');
-    playlistTitleEl.append(anyPlaylistInfo.title);
-    document.body.append(playlistTitleEl);
+// function renderPlaylistHeader(anyPlaylistInfo) {
+//     const playlistTitleEl = document.createElement('h1');
+//     playlistTitleEl.append(anyPlaylistInfo.title);
+//     document.body.append(playlistTitleEl);
 
-    const playlistCoverEl = document.createElement('img');
-    playlistCoverEl.src = anyPlaylistInfo.coverImage;
-    playlistCoverEl.style.width = '150px';
-    playlistCoverEl.style.height = '150px';
-    document.body.append(playlistCoverEl);
-}
+//     const playlistCoverEl = document.createElement('img');
+//     playlistCoverEl.src = anyPlaylistInfo.coverImage;
+//     playlistCoverEl.style.width = '150px';
+//     playlistCoverEl.style.height = '150px';
+//     document.body.append(playlistCoverEl);
+// }
 
-// не работает исправь смотри выше функцию renderPlaylist
-function renderTracksList(anyTracks) {
-    const trackEl = document.createElement('div');
-    const cover = document.createElement('img');
-    cover.src = anyTracks.coverImageUrl;
-    cover.style.width = '50px';
-    trackEl.append(cover);
-    trackEl.append(anyTracks.artistName + ": " + anyTracks.title);
-    const audio = document.createElement('audio');
-    audio.src = anyTracks.fileUrl;
-    audio.controls = true;
-    trackEl.append(audio);
+// // не работает исправь смотри выше функцию renderPlaylist
+// function renderTracksList(anyTracks) {
+//     const trackEl = document.createElement('div');
+//     const cover = document.createElement('img');
+//     cover.src = anyTracks.coverImageUrl;
+//     cover.style.width = '50px';
+//     trackEl.append(cover);
+//     trackEl.append(anyTracks.artistName + ": " + anyTracks.title);
+//     const audio = document.createElement('audio');
+//     audio.src = anyTracks.fileUrl;
+//     audio.controls = true;
+//     trackEl.append(audio);
 
-    document.body.append(trackEl);
-}
+//     document.body.append(trackEl);
+// }
 
 
 
@@ -123,36 +465,48 @@ function renderTracksList(anyTracks) {
 
 
 
-// с помощью цикла улучшено
-function renderTracksList(anyTracks) {
-    const tracklistElement = document.createElement('ul')
-    for (let i = 0; i < anyTracks.length; i++) {
-        const trackElement = createTrack(anyTracks[i])
-        tracklistElement.append(trackElement)
-    }
-    document.body.append(tracklistElement);
-}
 
-function createTrack(anyTrack) {
-    const trackElement = document.createElement('li')
-    const trackCoverElement = document.createElement('img')
 
-    trackCoverElement.src = anyTrack.coverImageUrl
-    trackCoverElement.style.width = '50px';
-    trackCoverElement.style.height = '50px';
 
-    const audio = document.createElement("audio")
-    audio.src = anyTrack.fileUrl
-    audio.controls = true
+// // с помощью цикла улучшено
+// function renderTracksList(anyTracks) {
+//     const tracklistElement = document.createElement('ul')
+//     for (let i = 0; i < anyTracks.length; i++) {
+//         const trackElement = createTrack(anyTracks[i])
+//         tracklistElement.append(trackElement)
+//     }
+//     document.body.append(tracklistElement);
+// }
 
-    trackElement.append(trackCoverElement)
-    trackElement.append(anyTrack.artistName + ": " + anyTrack.title)
-    trackElement.append(audio)
+// function createTrack(anyTrack) {
+//     const trackElement = document.createElement('li')
+//     const trackCoverElement = document.createElement('img')
 
-    return trackElement
-}
+//     trackCoverElement.src = anyTrack.coverImageUrl
+//     trackCoverElement.style.width = '50px';
+//     trackCoverElement.style.height = '50px';
 
-renderPlaylist(playlist);
+//     const audio = document.createElement("audio")
+//     audio.src = anyTrack.fileUrl
+//     audio.controls = true
+
+//     trackElement.append(trackCoverElement)
+//     trackElement.append(anyTrack.artistName + ": " + anyTrack.title)
+//     trackElement.append(audio)
+
+//     return trackElement
+// }
+
+// renderPlaylist(playlist);
+
+
+
+
+
+
+
+
+
 
 
 // // render
@@ -197,3 +551,23 @@ renderPlaylist(playlist);
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+//=========================
+// // render на странице
+// function render() {
+//     const root = document.getElementById("root")
+//     root.append(
+//     App()
+//     )
+// }
+
+// render()
