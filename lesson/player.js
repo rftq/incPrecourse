@@ -11,7 +11,7 @@ const data = {
             tracks: [
                 {
                     trackId: '1',
-                    trackCoverImageUrl: 'img/cardImage/trackList/track1.jpeg',
+                    trackCoverImgUrl: 'img/cardImage/trackList/track1.jpeg',
                     artistName: 'Eminem',
                     trackTitle: 'Rap God',
                     trackFileUrl: './audio/Eminem - Rap God.mp3',
@@ -19,7 +19,7 @@ const data = {
                 },
                 {
                     trackId: '2',
-                    trackCoverImageUrl: 'img/cardImage/trackList/track2.jpeg',
+                    trackCoverImgUrl: 'img/cardImage/trackList/track2.jpeg',
                     artistName: '50cent',
                     trackTitle: 'In da Club',
                     trackFileUrl: './audio/50cent - In da club.mp3',
@@ -37,7 +37,7 @@ const data = {
             tracks: [
                 {
                     trackId: '5',
-                    trackCoverImageUrl: 'img/cardImage/trackList/track5.jpeg',
+                    trackCoverImgUrl: 'img/cardImage/trackList/track5.jpeg',
                     artistName: 'Public Enemy',
                     trackTitle: 'Fight The Power',
                     trackFileUrl: './audio/Public Enemy - Fight The Power.mp3',
@@ -45,7 +45,7 @@ const data = {
                 },
                 {
                     trackId: '6',
-                    trackCoverImageUrl: 'img/cardImage/trackList/track6.jpeg',
+                    trackCoverImgUrl: 'img/cardImage/trackList/track6.jpeg',
                     artistName: 'Vanila Ice',
                     trackTitle: 'Ice Ice Baby',
                     trackFileUrl: './audio/Vanila Ice - Ice Baby.mp3',
@@ -58,13 +58,13 @@ const data = {
 
 
 
-
-function App() {
+// create DOM
+function App(someData) {
     const container = document.createElement("div")
     container.classList.add("App")
     container.append(
         Header(),
-        Main()
+        Main(someData)
     )
 
     return container
@@ -94,12 +94,12 @@ function Header() {
 
 //================================================================
 
-function Main() {
+function Main(someData) {
     const container = document.createElement("main")
 
     container.append(
         AddPlaylistPanel(),
-        Playlists()
+        Playlists(someData)
     )
     return container
 }
@@ -128,12 +128,12 @@ function AddPlaylistPanel(){
 
 //=================================================================
 
-function Playlists() {
+function Playlists(someData) {
     const container = document.createElement("div")
     container.classList.add('playlists')
 
-    for (let i = 0; i < data.playlists.length; i++) {
-        container.append(Playlist(data.playlists[i]));
+    for (let i = 0; i < someData.playlists.length; i++) {
+        container.append(Playlist(someData.playlists[i]));
     }
 
     return container
@@ -141,12 +141,17 @@ function Playlists() {
 
 //=================================================================
 
-function Playlist(playlist) {
+function Playlist(somePlaylist) {
+    // другие способы сократить somePlaylist.playlistInfo
+    // const playlistInfo = somePlaylist.playlistInfo
+    // const tracks = somePlaylist.tracks
+    const {playlistInfo, tracks} = somePlaylist
+
     const container = document.createElement("article")
     container.classList.add('playlist')
     container.append(
-        PlaylistInfo(playlist.playlistInfo),
-        Tracklist(playlist.tracks)
+        PlaylistInfo(somePlaylist.playlistInfo),
+        Tracklist(somePlaylist.tracks)
     )
 
     return container
@@ -154,23 +159,28 @@ function Playlist(playlist) {
 
 //=================================================================
 
-function PlaylistInfo(playlistInfo){
+function PlaylistInfo(somePlaylistInfo){
+    const {coverImgUrl, title, tracksCount } = somePlaylistInfo
+    
     const container = document.createElement('div')
     container.classList.add('playlist-info')
 
     const img  = document.createElement('img')
     img.classList.add('playlist-cover-image')
-    img.src = playlistInfo.coverImgUrl
+    // img.src = playlistInfo.coverImgUrl
+    img.src = coverImgUrl
 
     const wrapper = document.createElement('div')
 
     const titleElement = document.createElement('h2')
     titleElement.classList.add('title')
-    titleElement.innerText = playlistInfo.title
+    // titleElement.innerText = playlistInfo.title
+    titleElement.innerText = title
 
     const tracksCountElement = document.createElement('div')
     tracksCountElement.classList.add('tracks-count')
-    tracksCountElement.innerText = playlistInfo.tracksCount + ' tracks'
+    // tracksCountElement.innerText = playlistInfo.tracksCount + ' tracks'
+    tracksCountElement.innerText = tracksCount + ' tracks'
 
     wrapper.append(titleElement, tracksCountElement)
 
@@ -201,13 +211,13 @@ function PlaylistInfo(playlistInfo){
 
 //=================================================================
 
-function Tracklist(tracks){
+function Tracklist(someTracks){
     const container = document.createElement('div')
     container.classList.add('tracklist') 
 
     container.append(
         AddTrackPanel(),
-        List(tracks)
+        List(someTracks)
     )
 
     return container
@@ -215,7 +225,7 @@ function Tracklist(tracks){
 
 //=================================================================
 
-function AddTrackPanel(params) {
+function AddTrackPanel() {
     const container = document.createElement("div")
     container.classList.add("add-track-panel") 
 
@@ -267,12 +277,12 @@ function AddTrackPanel(params) {
 
 //=================================================================
 
-function List(tracks) {
+function List(someTracks) {
     const container = document.createElement("ul")
     container.classList.add("list")
 
-    for (let i = 0; i < tracks.length; i++) {
-        container.append(Track(tracks[i]))
+    for (let i = 0; i < someTracks.length; i++) {
+        container.append(Track(someTracks[i]))
     }
     
     return container
@@ -280,18 +290,21 @@ function List(tracks) {
 
 //=================================================================
 
-function Track(track) {
+function Track(someTrack) {
+    const {trackCoverImgUrl, ...restTrackData} = someTrack
+
     const container = document.createElement("li")
     container.classList.add("track-element")
 
     const trackCoverImg = document.createElement("img")
     trackCoverImg.classList.add("track-cover-image")
 
-    trackCoverImg.src = track.trackCoverImageUrl
+    // trackCoverImg.src = track.trackCoverImgUrl
+    trackCoverImg.src = trackCoverImgUrl
 
     container.append(
         trackCoverImg,
-        TrackDetails(track)
+        TrackDetails(restTrackData)
     )
 
     return container
@@ -299,16 +312,19 @@ function Track(track) {
 
 //=================================================================
 
-function TrackDetails(track) {
+function TrackDetails(someRestTrackData) {
+    const {trackFileUrl, ...restTrackData} = someRestTrackData
+
     const container = document.createElement("div")
     container.classList.add("track-details")
 
     const audio = document.createElement("audio")
-    audio.src = track.trackFileUrl
+    // audio.src = track.trackFileUrl
+    audio.src = trackFileUrl
     audio.controls = true
 
     container.append(
-        TrackTopLine(track),
+        TrackTopLine(restTrackData),
         audio
     )
 
@@ -317,11 +333,13 @@ function TrackDetails(track) {
 
 //=================================================================
 
-function TrackTopLine(track) {
+function TrackTopLine(someRestTrackData) {
+    const {isHot, artistName, trackTitle} = someRestTrackData
+
     const container = document.createElement("div")
     container.classList.add("track-top-line")
 
-    if (track.isHot) {
+    if (isHot) { //track.isHot
         const trackHotImg = document.createElement('img')
         trackHotImg.classList.add('track-status')
         trackHotImg.src = 'img/icons/hot.svg'
@@ -332,7 +350,8 @@ function TrackTopLine(track) {
 
     const trackName = document.createElement('div')
     trackName.classList.add('track-name')
-    trackName.innerText = track.artistName + '-' + track.trackTitle
+    // trackName.innerText = track.artistName + '-' + track.trackTitle
+    trackName.innerText = artistName + '-' + trackTitle
     trackInfo.append(
         trackName,
         ButtonsEditDelete()
@@ -369,12 +388,17 @@ function ButtonsEditDelete() {
 
 //=================================================================
 
-const root = document.getElementById("root")
-root.append(
-    App() // => container
-)
+// render DOM
+function render(someData) {
+    const root = document.getElementById("root")
+    root.append(
+    App(someData) // => container
+    )
+}
 
+render(data)
 
+//=================================================================
 
 // const playlistTitleEl = document.createElement('h1');
 // playlistTitleEl.append(playlist.title);
@@ -549,25 +573,3 @@ root.append(
 
 //     document.body.append(trackElement);
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-//=========================
-// // render на странице
-// function render() {
-//     const root = document.getElementById("root")
-//     root.append(
-//     App()
-//     )
-// }
-
-// render()
