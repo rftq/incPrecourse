@@ -1,0 +1,11 @@
+.progress-bar-container {
+  width: 400px; /* Ширина контейнера */
+  height: 20px; /* Высота контейнера */
+  background-color: #f1f1f1; /* Цвет фона контейнера */
+}
+
+.progress-bar {
+  height: 100%; /* Высота полосы равна высоте контейнера */
+  background-color: #4caf50; /* Цвет самой полосы */
+  transition: width 0.6s ease; /* Плавное изменение ширины при смене свойства */
+}
