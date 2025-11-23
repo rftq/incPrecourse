@@ -11,27 +11,43 @@
         const article1Title = "Experts Warn of Ransomware Hackers Exploiting Atlassian and Apache Flaws"
         const article1ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRPJEY3Yoh2KcphsZU8ge87I4lEtDV40QSUf6SiguWOgjQgJl3evknt5DNV6ma8M0tqWigY-FZOEz5fRDhnXPoSBADNrmXu9Ck3Kn5aokBGIOoCrQtuEVkgidpz-j123c8zqqaEnu-OvLK9spG6u-mY3oxFyFZ8-U_RVHkUhBotlmL2lg0nljOxiz45AND/s790-rw-e365/ransomware.jpg"
         const article1PartnershipUrl = null;
+        const article1PartnershipTitle = null;
         const isArticle1PartnershipPublication = false;
         const article1PublicationDate = "Nov 07, 2023"
-        const article1CategoryTitle1 = "Cyber Threat"
-        const article1CategoryTitle2 = "Malware"
+        const article1Category1Title = "Cyber Threat"
+        const article1Category2Title = "Malware"
         const article1Description = "Multiple ransomware groups have begun to actively exploit recently disclosed flaws in Atlassian Confluence and Apache ActiveMQ"
 
         const article2Title = "China-Linked APT31 Launches Stealthy Cyberattacks on Russian IT Using Cloud Services";
         const article2ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0ApbbGy1VeM3uMCY8dVuTIzKS2QJ1wsy4n57G1cLRnEfWcZ2UIsRx8AhTUv8lqBkZb3CQPhalZOTRXo1E8A8LR8EHjecR51E7dgfDI_mHhTYmYulkhNmv82ET56xgGl3qaT7so9t02M3e1JB9pxi_0HCX9cRYUP7qPn9wAg9Yv3JBDj8zpY7bPRuO41rc/s790-rw-e365/russia.jpg";
         const article2PartnershipUrl = "https://blogger.com";
+        const article2PartnershipTitle = "blogger.com";
         const isArticle2PartnershipPublication = true;
         const article2PublicationDate = null;
-        const article2CategoryTitle1 = "Cyber Espionage";
-        const article2CategoryTitle2 = "Cloud Security";
+        const article2Category1Title = "Cyber Espionage";
+        const article2Category2Title = "Cloud Security";
         const article2Description = "The China-linked advanced persistent threat (APT) group known as APT31 has been attributed to cyber attacks targeting the Russian information technology";
 
         // --------------------------------------------------------
 
         // ui program
-        document.write('<h1>', 'hello', '</h1>')
-        document.write('hey', 'hello')
+        // document.write('<h1>', 'hello', '</h1>');
+        // document.write('hey', 'hello');
+        document.write('<h2>', article1Title, '</h2>');
+        document.write('<img src ="', article1ImageUrl,'"/>');
+        document.write('<p>', article1PublicationDate, '</p>');
+        document.write('<p>', article1Category1Title, ' / ', article1Category2Title, '</p>');
+        document.write('<p>', article1Description, '</p>');
 
+        document.write('<hr/>');
+
+        document.write('<h2>', article1Title, '</h2>');
+        document.write('<img src ="', article2ImageUrl,'"/>');
+        document.write('<p><a href "', article2PartnershipUrl,'">', article2PartnershipTitle, '</a></p>');
+        document.write('<p>', article2Category1Title, ' / ', article2Category2Title, '</p>');
+        document.write('<p>', article2Description, '</p>');
+
+        document.write('<hr/>');
     </script>
 </body>
 </html>
