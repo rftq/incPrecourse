@@ -14,41 +14,49 @@
         // ---------------------------------
 
         document.write('START', '<br>')
-        
-        let product1Price = window.prompt('How much does product 1 cost?');
 
-        // if (balance >= product1Price) {
-        //     document.write('Product purchased');
-        // } else {
-        //     document.write('Not enough money');
-        // }
+        let product1PriceString = window.prompt('How much does product 1 cost?');
+        // let product1Price = +product1PriceString // перевели в число знаком +
+        let product1Price = window.Number(product1PriceString); // перевели в число
 
-        if (balance < product1Price) {
-            document.write('Not enough money', '<br>');
+        if (window.isNaN(product1Price)) {
+            // другой способ проверить что это число product1Price === product1Price => число, так как NoN не равен NaN
+            document.write('You input incorrect number', '<br>')
         } else {
-            balance = balance - product1Price;
-            document.write('Product 1 purchased', '<br>');
+            // if (balance >= product1Price) {
+            //     document.write('Product purchased');
+            // } else {
+            //     document.write('Not enough money');
+            // }
+
+            if (balance < product1Price) {
+                document.write('Not enough money', '<br>');
+            } else {
+                balance = balance - product1Price;
+                document.write('Product 1 purchased', '<br>');
+            }
+
+            product1Price = window.prompt('How much does product 2 cost?');
+
+            if (balance < product1Price) {
+                document.write('Not enough money', '<br>');
+            } else {
+                balance = balance - product1Price;
+                document.write('Product 2 purchased', '<br>');
+            }
+
+            product1Price = window.prompt('How much does product 3 cost?');
+
+            if (balance < product1Price) {
+                document.write('Not enough money', '<br>');
+            } else {
+                balance = balance - product1Price;
+                document.write('Product 3 purchased', '<br>');
+            }
+
         }
 
-        product1Price = window.prompt('How much does product 2 cost?');
-
-        if (balance < product1Price) {
-            document.write('Not enough money', '<br>');
-        } else {
-            balance = balance - product1Price;
-            document.write('Product 2 purchased', '<br>');
-        }
-
-        product1Price = window.prompt('How much does product 3 cost?');
-
-        if (balance < product1Price) {
-            document.write('Not enough money', '<br>');
-        } else {
-            balance = balance - product1Price;
-            document.write('Product 3 purchased', '<br>');
-        }
-
-        document.write('<br>', balance);
+        document.write('Balance: ', balance);
 
         document.write('<br>', 'END')
     </script>
