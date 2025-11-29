@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let product1Cost;
+        let product2Cost;
+
+        product1Cost = 200;
+        product2Cost = 100;
+
+        console.log(product1Cost > product2Cost); // true
+        console.log((product1Cost - product2Cost) > 0); // 100
+
+        product1Cost = 100;
+        product2Cost = 100;
+        console.log(product1Cost === product2Cost); // true
+        console.log((product1Cost - product2Cost) === 0); // 0
+
+        product1Cost = 100;
+        product2Cost = 200;
+        console.log(product1Cost < product2Cost); // true
+        console.log((product1Cost - product2Cost) < 0); // -100
+
+        // 1 / 10 = 0.1
+        // в процентах умножаем на 100
+        // 12 / 10 = 1.2 = 120%     100 - 120 = -20     на 20% перевыполнен план
+        // другой пример план 100, получили 200, на сколько улучшили план?
+        // в два раза, то есть 200-100 = на 100%
+
+        let userBalance;
+        let productCost;
+        let difference;
+        let balanceCostRatio;
+        let balanceCostPercentage; // то же самое, что и balanceCostRatio только * 100
+
+        userBalance = 100;
+        productCost = 20;
+        difference = userBalance - productCost;
+        console.log(difference); // 80
+        console.log(difference > 0); // true
+
+        userBalance = 20;
+        productCost = 30;
+        difference = userBalance - productCost;
+        console.log(difference); // -10
+        console.log(difference >= 0); // false
+
+        userBalance = 10;
+        productCost = 1;
+        balanceCostRatio = productCost / userBalance; // 0.1
+        balanceCostPercentage = balanceCostRatio * 100; // 10
+
+        userBalance = 100;
+        productCost = 1;
+        balanceCostRatio = productCost / userBalance; // 0.01
+        balanceCostPercentage = balanceCostRatio * 100; // 33
+
+        userBalance = 100;
+        productCost = 33;
+        balanceCostRatio = productCost / userBalance; // 0.31
+        balanceCostPercentage = balanceCostRatio * 100; // 1%
+
+        userBalance = 888; // 100%
+        productCost = 444; // x?
+        balanceCostRatio = productCost / userBalance; // 0.50
+        balanceCostPercentage = balanceCostRatio * 100; // 50%
+
+        userBalance = 100; // 100%
+        productCost = 200; // x?
+        balanceCostRatio = productCost / userBalance; // 2
+        balanceCostPercentage = balanceCostRatio * 100; // 200%
+
+        userBalance = 30; // 100%
+        productCost = 90; // x?
+        balanceCostRatio = productCost / userBalance; // 3
+        balanceCostPercentage = balanceCostRatio * 100; // 300%
+
+    </script>
+</body>
+
+</html>
