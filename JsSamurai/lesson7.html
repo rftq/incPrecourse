@@ -4,35 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Сложная программа, if else, проценты, счётчик</title>
 </head>
 
 <body>
     <script>
-        const word0 = "Wassup";
-        const word0translation = "Здарова";
 
-        const word1 = "Bye";
-        const word1translation = "Покеда";
+        const word0 = {
+            original: 'Wassap',
+            translation: 'Здорова'
+        }
 
-        const word2 = "Programmer";
-        const word2translation = "Программист";
+        const word1 = {
+            original: 'Bye',
+            translation: 'Покеда'
+        }
+
+        const word2 = {
+            original: 'Programmer',
+            translation: 'Программист'
+        }
 
         const wordsCount = 3;
 
-        const finishSuccessMessage = "Молодец. Good result!";
-        const finishUnsuccessMessage = "Молодец, но постарайся лучше.";
+        const resultMessages = {
+            finishSuccess: "Молодец. Good result!",
+            finishUnsuccess: "Молодец, но постарайся лучше."
+        }
 
-        const correctAnswersMinPercent = 50;
+        const settings = {
+            correctAnswersMinPercent: 50
+        }
 
-        let correctAnswersCount = 0;
+        const result = {
+            correctAnswersCount: 0
+        }
 
         // ----------------------------
 
-        const userAnswer0 = prompt(word0);
-        alert(userAnswer0 === word0translation);
-        if (userAnswer0 === word0translation) {k
-            correctAnswersCount = correctAnswersCount + 1;
+        const userAnswer0 = prompt(word0.original);
+        alert(userAnswer0 === word0.translation);
+        if (userAnswer0 === word0.translation) {
+            result.correctAnswersCount = correctAnswersCount + 1;
         }
 
         const userAnswer1 = prompt(word1);

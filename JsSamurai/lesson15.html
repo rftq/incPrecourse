@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Объекты</title>
+</head>
+
+<body>
+    <script>
+        console.log('hello');
+
+        let myConsole = {
+            name: 'Dimych',
+            age: 35
+        }
+
+        window.alert(myConsole.age)
+
+        let man = {
+            name: 'Dimych',
+            age: 34
+        }
+
+        man.age = 35; // переопределили age
+
+        console.log(man);
+
+        const laptop1 = {
+            name: 'zenbook',
+            manufacturer: 'ASUS',
+            price: 1000
+        }
+
+        const laptop2 = {
+            name: 'macbook',
+            manufacturer: {
+                title: 'Apple',
+                factoriesCount: 10,
+                factoryAddress: 'China, JohueLee 12'
+            },
+            price: 3000
+        }
+
+        const moneyTransfering = {
+            from: 'Dimych',
+            to: 'Ivan',
+            amount: 10
+        }
+
+
+        console.log(laptop2.manufacturer.factoryAddress);
+        console.log(laptop2.manufacturer.factoryAddress.toUpperCase());
+
+        laptop2.manufacturer.factoryAddress = 'China, JohueLee 13'
+        console.log(laptop2.manufacturer.factoryAddress);
+
+        let room = {
+            wall1: {
+                hasWindow: true,
+                color: 'white',
+                conditioner: {
+                    manufacturer: 'Midea',
+                    power: 220
+                }
+            },
+            wall2: {
+                hasWindow: false,
+                color: 'white',
+                conditioner: null
+            },
+            wall3: {
+                hasWindow: false,
+                color: 'white',
+                conditioner: null
+            },
+            wall4: {
+                hasWindow: false,
+                color: 'white',
+                conditioner: null
+            },
+        }
+
+        console.log(room.wall1.conditioner.manufacturer);
+        
+
+    </script>
+</body>
+
+</html>
