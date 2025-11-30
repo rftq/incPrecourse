@@ -9,23 +9,39 @@
 
 <body>
     <script>
-        const vocabulary = {
-            words: {
-                word0: {
-                    original: 'Wassap',
-                    translation: 'Здарова'
-                },
-                word1: {
-                    original: 'Bye',
-                    translation: 'Покеда'
-                },
-                word2: {
-                    original: 'Programmer',
-                    translation: 'Программист'
-                },
+
+        const words = [
+            {
+                original: 'Wassap',
+                translation: 'Здарова'
             },
-            wordsCount: 3
-        }
+            {
+                original: 'Bye',
+                translation: 'Покеда'
+            },
+            {
+                original: 'Programmer',
+                translation: 'Программист'
+            },
+        ]
+
+        // const vocabulary = {
+        //     words: {
+        //         word0: {
+        //             original: 'Wassap',
+        //             translation: 'Здарова'
+        //         },
+        //         word1: {
+        //             original: 'Bye',
+        //             translation: 'Покеда'
+        //         },
+        //         word2: {
+        //             original: 'Programmer',
+        //             translation: 'Программист'
+        //         },
+        //     },
+        //     wordsCount: 3
+        // }
 
         const wordsCount = 3;
 
@@ -52,25 +68,25 @@
 
         alert(notificationMessages.start.hello)
 
-        const userAnswer0 = prompt(vocabulary.words.word0.original);
-        alert(userAnswer0 === vocabulary.words.word0.translation);
-        if (userAnswer0 === vocabulary.words.word0.translation) {
+        const userAnswer0 = prompt(words[0].original);
+        alert(userAnswer0 === words[0].translation);
+        if (userAnswer0 === words[0].translation) {
             result.correctAnswersCount = result.correctAnswersCount + 1;
         }
 
-        const userAnswer1 = prompt(vocabulary.words.word1.original);
-        alert(userAnswer1 === vocabulary.words.word1.translation);
-        if (userAnswer1 === vocabulary.words.word1.translation) {
+        const userAnswer1 = prompt(words[1].word1.original);
+        alert(userAnswer1 === words[1].translation);
+        if (userAnswer1 === words[1].translation) {
             result.correctAnswersCount = result.correctAnswersCount + 1;
         }
 
-        const userAnswer2 = prompt(vocabulary.words.word2.original);
-        alert(userAnswer2 === vocabulary.words.word2.translation);
-        if (userAnswer2 === vocabulary.words.word2.translation) {
+        const userAnswer2 = prompt(words[2].original);
+        alert(userAnswer2 === words[2].translation);
+        if (userAnswer2 === words[2].translation) {
             result.correctAnswersCount = result.correctAnswersCount + 1;
         }
 
-        const userCorrectAnswersPercent = result.correctAnswersCount / vocabulary.wordsCount * 100
+        const userCorrectAnswersPercent = result.correctAnswersCount / words.length * 100
 
         if (userCorrectAnswersPercent > settings.correctAnswersMinPercent) {
             alert(notificationMessages.result.finishSuccess);
