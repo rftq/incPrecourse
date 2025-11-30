@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Путь Самурая. Массив, array</title>
+</head>
+
+<body>
+    <script>
+
+        // Массив оценок студента
+
+        let grade1 = 5;
+        let grade2 = 4;
+        let grade3 = 3;
+        let grade4 = 5;
+        let grade5 = 4;
+        console.log(grade1); // 5 - это оценка за первый предмет
+        console.log(grade3); // 3 - это оценка за третий предмет
+
+        let grades = [5, 4, 3, 5, 4];
+
+        console.log(grades[0]);
+
+        let extractedGrade = grades[4];
+
+        console.log(extractedGrade);
+
+        // Массив названий книг в библиотеке
+
+        let book1 = 'Война и мир';
+        let book2 = 'Мастер и Маргарита';
+        let book3 = 'Преступление и наказание';
+
+        console.log(book2);
+
+        let books = ['Война и мир', 'Мастер и Маргарита', 'Преступление и наказание']
+
+        let masterAndMargoBook = books[1]; // ещё одна ссылка на книгу
+
+        console.log(books[1]);
+        console.log(masterAndMargoBook);
+
+        let answer1 = true;
+        let answer2 = false;
+        let answer3 = true;
+        let answer4 = true;
+
+        console.log(answer1); // true - первый человек ответил "да"
+
+        let answers = [true, false, true, true];
+
+        let answer = answers[1];
+        console.log(answers[1]);
+
+        // Массив паспортных данных людей
+
+        let person1 = { name: 'Анна', surname: 'Смирнова', birthYear: 1990 };
+        let person2 = { name: 'Иван', surname: 'Петров', birthYear: 1985 };
+
+        console.log(person2.name);
+
+        let persons = [
+            {
+                name: 'Анна',
+                surname: 'Смирнова',
+                birthYear: 1990
+            },
+            {
+                name: 'Иван',
+                surname: 'Петров',
+                birthYear: 1985
+            },
+        ];
+
+        // let person = persons[0].birthYear
+        let person = persons[1]// тоже ссылка на объект в памяти
+
+        console.log(person.birthYear);
+
+        // Массив списков покупок
+
+        shoppingList1Item1 = 'молоко';
+        shoppingList1Item2 = 'хлеб';
+        shoppingList1Item3 = 'яйца';
+
+        shoppingList2Item1 = 'сок';
+        shoppingList2Item2 = 'мороженое';
+
+        shoppingList3Item1 = 'корм для кота';
+        shoppingList3Item2 = 'шампунь';
+
+        console.log(shoppingList1Item2); // "хлеб" - второй товар в первом списке
+
+        let shoppingLists = [
+            ['молоко', 'хлеб', 'яйца'],
+            ['сок', 'мороженое'],
+            ['корм для кота', 'шампунь']
+        ]
+
+        console.log(shoppingLists[1][0]);
+
+        let list = shoppingLists[2];
+        let product = list[0]
+        console.log(product);
+
+
+    </script>
+</body>
+
+</html>
